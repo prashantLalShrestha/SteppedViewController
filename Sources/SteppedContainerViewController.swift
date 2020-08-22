@@ -10,10 +10,18 @@ import UIKit
 import CocoaUI
 import FlexibleSteppedProgressBar
 
-class SteppedContainerViewController: ViewController, SteppedViewControllerDelegate, FlexibleSteppedProgressBarDelegate {
+public class SteppedContainerViewController: ViewController, SteppedViewControllerDelegate, FlexibleSteppedProgressBarDelegate {
     
-    var viewControllers: [SteppedViewController]?
-    var currentIndex: Int? {
+    public var viewControllers: [SteppedViewController]? {
+        didSet {
+
+            viewControllers?.forEach({
+                $0.buttonTapDelegate = self
+                $0.stepBar = steppedProgressBar
+            })
+        }
+    }
+    public var currentIndex: Int? {
         didSet {
             if currentIndex == 0 {
                 self.closeBarButtonIcon = UIImage(named: "icn_close")
@@ -72,14 +80,14 @@ class SteppedContainerViewController: ViewController, SteppedViewControllerDeleg
         return viewController
     }()
     
+    init() {
+        super.init(nibName: nil, bundle: Bundle(for: SteppedContainerViewController.self))
+    }
+    
     
     init(viewControllers: [SteppedViewController], title: String) {
         self.viewControllers = viewControllers
         super.init(nibName: nil, bundle: Bundle(for: SteppedContainerViewController.self))
-        viewControllers.forEach({
-            $0.buttonTapDelegate = self
-            $0.stepBar = steppedProgressBar
-        })
         self.navigationTitle = title
     }
     
@@ -87,7 +95,7 @@ class SteppedContainerViewController: ViewController, SteppedViewControllerDeleg
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func makeUI() {
+    public override func makeUI() {
         super.makeUI()
         
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -115,7 +123,7 @@ class SteppedContainerViewController: ViewController, SteppedViewControllerDeleg
         steppedProgressBar.topAnchor.constraint(equalTo: steppedProgressbarContainerView.topAnchor, constant: 8).isActive = true
         steppedProgressBar.centerXAnchor.constraint(equalTo: steppedProgressbarContainerView.centerXAnchor).isActive = true
         steppedProgressBar.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        steppedProgressBar.bottomAnchor.constraint(equalTo: steppedProgressbarContainerView.bottomAnchor, constant: 0).isActive = true
+        steppedProgressBar.bottomAnchor.constraint(equalTo: steppedProgressbarContainerView.bottomAnchor, constant: -24).isActive = true
         
         if let count = viewControllers?.count, count >= 2 {
             steppedProgressBar.numberOfPoints = count
@@ -171,7 +179,7 @@ class SteppedContainerViewController: ViewController, SteppedViewControllerDeleg
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    func moveToNextViewController() {
+    public func moveToNextViewController() {
         if let viewControllers = viewControllers, let currentIndex = currentIndex, currentIndex < viewControllers.count - 1 {
             let nextIndex = currentIndex + 1
             viewControllers[currentIndex].navigationController?.pushViewController(viewControllers[nextIndex], animated: true)
@@ -180,7 +188,7 @@ class SteppedContainerViewController: ViewController, SteppedViewControllerDeleg
         }
     }
     
-    func moveToPreviousViewController() {
+    public func moveToPreviousViewController() {
         if let viewControllers = viewControllers, let currentIndex = currentIndex, currentIndex > 0 {
             let nextIndex = currentIndex - 1
             viewControllers[currentIndex].navigationController?.popViewController(animated: true)
@@ -189,11 +197,11 @@ class SteppedContainerViewController: ViewController, SteppedViewControllerDeleg
         }
     }
     
-    func dismissSteppedNavigationController() {
+    public func dismissSteppedNavigationController() {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    func progressBar(_ progressBar: FlexibleSteppedProgressBar, textAtIndex index: Int, position: FlexibleSteppedProgressBarTextLocation) -> String {
+    public func progressBar(_ progressBar: FlexibleSteppedProgressBar, textAtIndex index: Int, position: FlexibleSteppedProgressBarTextLocation) -> String {
         if position == FlexibleSteppedProgressBarTextLocation.bottom {
             if let viewControllers = viewControllers {
                 return viewControllers[index].title ?? viewControllers[index].navigationTitle
