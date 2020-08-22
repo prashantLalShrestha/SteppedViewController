@@ -13,7 +13,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/amratab/FlexibleSteppedProgressBar.git", .upToNextMinor(from: "0.6.3")),
-        .package(url: "https://github.com/prashantLalShrestha/CocoaUI.git", .upToNextMinor(from: "1.6.1")),
+        .package(url: "https://github.com/prashantLalShrestha/CocoaUI.git", .upToNextMinor(from: "1.6.2")),
     ],
     targets: [
         .target(
