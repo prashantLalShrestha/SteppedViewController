@@ -27,12 +27,12 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
     private(set) public var currentIndex: Int? {
         didSet {
             if currentIndex == 0 {
-                self.closeBarButtonIcon = UIImage(named: "icn_close")
+                self.closeBarButtonIcon = closeBarButtonIcon ?? UIImage.closeImage().scaled(to: CGSize(width: 16, height: 16))?.withRenderingMode(.alwaysTemplate)
                 self.closeBarAction = { [weak self] () in
                     self?.dismissSteppedNavigationController()
                 }
             } else {
-                self.closeBarButtonIcon = UIImage(named: "icn_back")
+                self.closeBarButtonIcon = backBarButtonIcon ?? UIImage.backArrowImage().scaled(to: CGSize(width: 16, height: 16))?.withRenderingMode(.alwaysTemplate)
                 self.closeBarAction = { [weak self] () in
                     self?.moveToPreviousViewController()
                 }
