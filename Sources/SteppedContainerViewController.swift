@@ -24,7 +24,7 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
             })
         }
     }
-    public var currentIndex: Int? {
+    private(set) public var currentIndex: Int? {
         didSet {
             if currentIndex == 0 {
                 self.closeBarButtonIcon = UIImage(named: "icn_close")
@@ -44,7 +44,7 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
         let view = UIView()
         return view
     }()
-    lazy var steppedProgressBar: SteppedProgressBar = {
+    public lazy var steppedProgressBar: SteppedProgressBar = {
         let view = SteppedProgressBar()
         
         view.lineHeight = 1
