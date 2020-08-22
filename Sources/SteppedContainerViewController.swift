@@ -26,19 +26,13 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
     }
     private(set) public var currentIndex: Int? {
         didSet {
-            if currentIndex == 0 {
-                closeBarButton.image = closeBarButtonIcon ?? UIImage.closeImage().scaled(to: CGSize(width: 16, height: 16))?.withRenderingMode(.alwaysTemplate)
-                self.closeBarAction = { [weak self] () in
-                    self?.dismissSteppedNavigationController()
-                }
-            } else {
-                closeBarButton.image = backBarButtonIcon ?? UIImage.backArrowImage().scaled(to: CGSize(width: 16, height: 16))?.withRenderingMode(.alwaysTemplate)
-                self.closeBarAction = { [weak self] () in
-                    self?.moveToPreviousViewController()
-                }
+            if let currentIndex = currentIndex, let viewController = viewControllers?[currentIndex] {
+                delegate?.steppedViewController(viewController, didMoveTo: currentIndex)
             }
         }
     }
+    
+    public var delegate: SteppedContainerViewControllerDelegate?
     
     lazy var steppedProgressbarContainerView: UIView = {
         let view = UIView()
@@ -56,15 +50,6 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
         view.stepAnimationDuration = 0.16
         view.centerLayerTextColor = UIColor.clear
         view.centerLayerDarkBackgroundTextColor = UIColor.clear
-//        view.currentSelectedTextColor = UIColor(named: "col_accent")
-//        view.stepTextColor = UIColor(named: "col_text_light_grey")
-//        view.selectedOuterCircleStrokeColor = view.currentSelectedTextColor
-//        view.currentSelectedCenterColor = view.currentSelectedTextColor
-//        view.selectedBackgoundColor = view.currentSelectedTextColor
-//        view.backgroundShapeColor = view.stepTextColor!.withAlphaComponent(0.4)
-//        view.stepTextFont = UIFont(name: "Helvetica Neue", size: 14)
-
-        
         view.delegate = self
         return view
     }()
@@ -187,6 +172,7 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
     public func moveToNextViewController() {
         if let viewControllers = viewControllers, let currentIndex = currentIndex, currentIndex < viewControllers.count - 1 {
             let nextIndex = currentIndex + 1
+            delegate?.steppedViewController(viewControllers[nextIndex], willMoveTo: nextIndex)
             viewControllers[currentIndex].navigationController?.pushViewController(viewControllers[nextIndex], animated: true)
             self.currentIndex = nextIndex
             steppedProgressBar.currentIndex = nextIndex
@@ -196,6 +182,7 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
     public func moveToPreviousViewController() {
         if let viewControllers = viewControllers, let currentIndex = currentIndex, currentIndex > 0 {
             let nextIndex = currentIndex - 1
+            delegate?.steppedViewController(viewControllers[nextIndex], willMoveTo: nextIndex)
             viewControllers[currentIndex].navigationController?.popViewController(animated: true)
             self.currentIndex = nextIndex
             steppedProgressBar.currentIndex = nextIndex

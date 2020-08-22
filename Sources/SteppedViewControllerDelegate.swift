@@ -14,3 +14,9 @@ public protocol SteppedViewControllerDelegate: class {
     func moveToPreviousViewController()
     func dismissSteppedNavigationController()
 }
+
+
+public protocol SteppedContainerViewControllerDelegate: class {
+    func steppedViewController(_ steppedViewController: SteppedViewController, willMoveTo index: Int)
+    func steppedViewController(_ steppedViewController: SteppedViewController, didMoveTo index: Int)
+}
