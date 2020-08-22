@@ -37,15 +37,18 @@ class SteppedContainerViewController: ViewController, SteppedViewControllerDeleg
         let view = SteppedProgressBar()
         
         view.lineHeight = 1
-        view.radius = 12
-        view.progressRadius = 16
-        view.selectedOuterCircleLineWidth = 1
+        view.radius = 8
+        view.progressRadius = 9
+        view.selectedOuterCircleLineWidth = 2
         view.progressLineHeight = 1
+        view.textDistance = 9
+        view.stepAnimationDuration = 0.16
+        view.centerLayerTextColor = UIColor.clear
+        view.centerLayerDarkBackgroundTextColor = UIColor.clear
 //        view.currentSelectedTextColor = UIColor(named: "col_accent")
 //        view.stepTextColor = UIColor(named: "col_text_light_grey")
 //        view.selectedOuterCircleStrokeColor = view.currentSelectedTextColor
 //        view.currentSelectedCenterColor = view.currentSelectedTextColor
-//        view.centerLayerTextColor = UIColor(named: "col_background")
 //        view.selectedBackgoundColor = view.currentSelectedTextColor
 //        view.backgroundShapeColor = view.stepTextColor!.withAlphaComponent(0.4)
 //        view.stepTextFont = UIFont(name: "Helvetica Neue", size: 14)
@@ -112,7 +115,7 @@ class SteppedContainerViewController: ViewController, SteppedViewControllerDeleg
         steppedProgressBar.topAnchor.constraint(equalTo: steppedProgressbarContainerView.topAnchor, constant: 8).isActive = true
         steppedProgressBar.centerXAnchor.constraint(equalTo: steppedProgressbarContainerView.centerXAnchor).isActive = true
         steppedProgressBar.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        steppedProgressBar.bottomAnchor.constraint(equalTo: steppedProgressbarContainerView.bottomAnchor, constant: -40).isActive = true
+        steppedProgressBar.bottomAnchor.constraint(equalTo: steppedProgressbarContainerView.bottomAnchor, constant: 0).isActive = true
         
         if let count = viewControllers?.count, count >= 2 {
             steppedProgressBar.numberOfPoints = count
@@ -164,6 +167,8 @@ class SteppedContainerViewController: ViewController, SteppedViewControllerDeleg
             containerNavigationController.pushViewController(firstViewController, animated: true)
             currentIndex = 0
         }
+        
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     func moveToNextViewController() {
