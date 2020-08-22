@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = "SteppedViewController"
-  spec.version = "1.2.2"
+  spec.version = "1.2.3"
   spec.summary = "SteppedViewController is just a simple Material UI utility Module"
 
   spec.description = <<-DESC
