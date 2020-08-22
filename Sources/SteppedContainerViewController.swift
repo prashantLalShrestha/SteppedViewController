@@ -65,6 +65,8 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
     lazy var containerNavigationController: NavigationController = {
         let viewController = NavigationController()
         viewController.isNavigationBarHidden = true
+        viewController.delegate = nil
+        viewController.interactivePopGestureRecognizer?.delegate = nil
         viewController.interactivePopGestureRecognizer?.isEnabled = true
         return viewController
     }()
