@@ -10,7 +10,7 @@ import UIKit
 import CocoaUI
 import FlexibleSteppedProgressBar
 
-public class SteppedContainerViewController: ViewController, SteppedViewControllerDelegate, FlexibleSteppedProgressBarDelegate {
+open class SteppedContainerViewController: ViewController, SteppedViewControllerDelegate, FlexibleSteppedProgressBarDelegate {
     
     public var viewControllers: [SteppedViewController]? {
         didSet {
@@ -83,12 +83,12 @@ public class SteppedContainerViewController: ViewController, SteppedViewControll
         return viewController
     }()
     
-    init() {
+    public init() {
         super.init(nibName: nil, bundle: Bundle(for: SteppedContainerViewController.self))
     }
     
     
-    init(viewControllers: [SteppedViewController], title: String) {
+    public init(viewControllers: [SteppedViewController], title: String) {
         self.viewControllers = viewControllers
         super.init(nibName: nil, bundle: Bundle(for: SteppedContainerViewController.self))
         viewControllers.forEach({
@@ -98,7 +98,7 @@ public class SteppedContainerViewController: ViewController, SteppedViewControll
         self.navigationTitle = title
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
