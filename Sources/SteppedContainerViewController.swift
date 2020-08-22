@@ -14,10 +14,13 @@ public class SteppedContainerViewController: ViewController, SteppedViewControll
     
     public var viewControllers: [SteppedViewController]? {
         didSet {
-
             viewControllers?.forEach({
-                $0.buttonTapDelegate = self
-                $0.stepBar = steppedProgressBar
+                if $0.buttonTapDelegate == nil {
+                    $0.buttonTapDelegate = self
+                }
+                if $0.stepBar == nil {
+                    $0.stepBar = steppedProgressBar
+                }
             })
         }
     }
@@ -86,8 +89,12 @@ public class SteppedContainerViewController: ViewController, SteppedViewControll
     
     
     init(viewControllers: [SteppedViewController], title: String) {
-        super.init(nibName: nil, bundle: Bundle(for: SteppedContainerViewController.self))
         self.viewControllers = viewControllers
+        super.init(nibName: nil, bundle: Bundle(for: SteppedContainerViewController.self))
+        viewControllers.forEach({
+            $0.buttonTapDelegate = self
+            $0.stepBar = steppedProgressBar
+        })
         self.navigationTitle = title
     }
     
