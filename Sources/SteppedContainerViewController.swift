@@ -129,7 +129,7 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
         steppedProgressBar.translatesAutoresizingMaskIntoConstraints = false
         steppedProgressBar.topAnchor.constraint(equalTo: steppedProgressbarContainerView.topAnchor, constant: 8).isActive = true
         steppedProgressBar.centerXAnchor.constraint(equalTo: steppedProgressbarContainerView.centerXAnchor).isActive = true
-        steppedProgressBar.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        steppedProgressBar.heightAnchor.constraint(equalToConstant: 24).isActive = true
         steppedProgressBar.bottomAnchor.constraint(equalTo: steppedProgressbarContainerView.bottomAnchor, constant: -24).isActive = true
         
         if let count = viewControllers?.count, count >= 2 {
