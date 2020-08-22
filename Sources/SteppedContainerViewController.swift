@@ -175,6 +175,7 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
     public func moveToNextViewController() {
         if let viewControllers = viewControllers, let currentIndex = currentIndex, currentIndex < viewControllers.count - 1 {
             let nextIndex = currentIndex + 1
+            self.navigationController?.view.endEditing(true)
             delegate?.steppedViewController(viewControllers[nextIndex], willMoveTo: nextIndex)
             viewControllers[currentIndex].navigationController?.pushViewController(viewControllers[nextIndex], animated: true)
             self.currentIndex = nextIndex
@@ -185,6 +186,7 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
     public func moveToPreviousViewController() {
         if let viewControllers = viewControllers, let currentIndex = currentIndex, currentIndex > 0 {
             let nextIndex = currentIndex - 1
+            self.navigationController?.view.endEditing(true)
             delegate?.steppedViewController(viewControllers[nextIndex], willMoveTo: nextIndex)
             viewControllers[currentIndex].navigationController?.popViewController(animated: true)
             self.currentIndex = nextIndex
