@@ -12,7 +12,7 @@ import FlexibleSteppedProgressBar
 
 open class SteppedContainerViewController: ViewController, SteppedViewControllerDelegate, FlexibleSteppedProgressBarDelegate {
     
-    public var viewControllers: [SteppedViewController]? {
+    private(set) public var viewControllers: [SteppedViewController]? {
         didSet {
             viewControllers?.forEach({
                 if $0.buttonTapDelegate == nil {
@@ -82,11 +82,6 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
         viewController.isNavigationBarHidden = true
         return viewController
     }()
-    
-    public init() {
-        super.init(nibName: nil, bundle: Bundle(for: SteppedContainerViewController.self))
-    }
-    
     
     public init(viewControllers: [SteppedViewController], title: String) {
         self.viewControllers = viewControllers
