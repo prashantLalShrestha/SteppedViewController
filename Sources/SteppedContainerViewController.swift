@@ -97,6 +97,11 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
         fatalError("init(coder:) has not been implemented")
     }
     
+    open override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        super.viewWillAppear(animated)
+    }
+    
     public override func makeUI() {
         super.makeUI()
         
@@ -177,8 +182,6 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
             containerNavigationController.pushViewController(firstViewController, animated: true)
             currentIndex = 0
         }
-        
-        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     public func moveToNextViewController() {
