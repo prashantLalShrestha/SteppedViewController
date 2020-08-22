@@ -86,8 +86,8 @@ public class SteppedContainerViewController: ViewController, SteppedViewControll
     
     
     init(viewControllers: [SteppedViewController], title: String) {
-        self.viewControllers = viewControllers
         super.init(nibName: nil, bundle: Bundle(for: SteppedContainerViewController.self))
+        self.viewControllers = viewControllers
         self.navigationTitle = title
     }
     
