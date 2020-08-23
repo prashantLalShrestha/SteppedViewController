@@ -46,7 +46,7 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
         view.progressRadius = 9
         view.selectedOuterCircleLineWidth = 2
         view.progressLineHeight = 1
-        view.textDistance = 12
+        view.textDistance = 11
         view.stepAnimationDuration = 0.16
         view.centerLayerTextColor = UIColor.clear
         view.centerLayerDarkBackgroundTextColor = UIColor.clear
@@ -65,7 +65,6 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
     lazy var containerNavigationController: NavigationController = {
         let viewController = NavigationController()
         viewController.isNavigationBarHidden = true
-        viewController.interactivePopGestureRecognizer?.isEnabled = false
         return viewController
     }()
     
@@ -85,6 +84,7 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
     
     open override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        containerNavigationController.interactivePopGestureRecognizer?.isEnabled = false
         super.viewWillAppear(animated)
     }
     
@@ -116,7 +116,7 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
         steppedProgressBar.topAnchor.constraint(equalTo: steppedProgressbarContainerView.topAnchor, constant: 8).isActive = true
         steppedProgressBar.centerXAnchor.constraint(equalTo: steppedProgressbarContainerView.centerXAnchor).isActive = true
         steppedProgressBar.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        steppedProgressBar.bottomAnchor.constraint(equalTo: steppedProgressbarContainerView.bottomAnchor, constant: -28).isActive = true
+        steppedProgressBar.bottomAnchor.constraint(equalTo: steppedProgressbarContainerView.bottomAnchor, constant: -26).isActive = true
         
         if let count = viewControllers?.count, count >= 2 {
             steppedProgressBar.numberOfPoints = count
