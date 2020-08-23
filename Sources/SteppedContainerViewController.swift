@@ -46,7 +46,7 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
         view.progressRadius = 9
         view.selectedOuterCircleLineWidth = 2
         view.progressLineHeight = 1
-        view.textDistance = 9
+        view.textDistance = 12
         view.stepAnimationDuration = 0.16
         view.centerLayerTextColor = UIColor.clear
         view.centerLayerDarkBackgroundTextColor = UIColor.clear
@@ -65,9 +65,7 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
     lazy var containerNavigationController: NavigationController = {
         let viewController = NavigationController()
         viewController.isNavigationBarHidden = true
-        viewController.delegate = nil
-        viewController.interactivePopGestureRecognizer?.delegate = nil
-        viewController.interactivePopGestureRecognizer?.isEnabled = true
+        viewController.interactivePopGestureRecognizer?.isEnabled = false
         return viewController
     }()
     
@@ -118,7 +116,7 @@ open class SteppedContainerViewController: ViewController, SteppedViewController
         steppedProgressBar.topAnchor.constraint(equalTo: steppedProgressbarContainerView.topAnchor, constant: 8).isActive = true
         steppedProgressBar.centerXAnchor.constraint(equalTo: steppedProgressbarContainerView.centerXAnchor).isActive = true
         steppedProgressBar.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        steppedProgressBar.bottomAnchor.constraint(equalTo: steppedProgressbarContainerView.bottomAnchor, constant: -24).isActive = true
+        steppedProgressBar.bottomAnchor.constraint(equalTo: steppedProgressbarContainerView.bottomAnchor, constant: -28).isActive = true
         
         if let count = viewControllers?.count, count >= 2 {
             steppedProgressBar.numberOfPoints = count
