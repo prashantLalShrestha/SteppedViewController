@@ -12,8 +12,8 @@ let package = Package(
             targets: ["SteppedViewController"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/amratab/FlexibleSteppedProgressBar.git", .upToNextMinor(from: "0.6.3")),
-        .package(url: "https://github.com/prashantLalShrestha/CocoaUI.git", .upToNextMinor(from: "1.6.2")),
+        .package(url: "https://github.com/amratab/FlexibleSteppedProgressBar.git", .upToNextMajor(from: "0.6.3")),
+        .package(url: "https://github.com/prashantLalShrestha/CocoaUI.git", .upToNextMajor(from: "1.6.2")),
     ],
     targets: [
         .target(
